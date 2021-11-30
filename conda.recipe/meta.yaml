@@ -25,14 +25,14 @@ requirements:
     - r
     - r-ggplot2
   run:
-    - r
-    - r-ggplot2
     - python
     - pip
     - poetry
     - numpy
     - pandas
     - tzlocal
+    - r
+    - r-ggplot2
     - rpy2
     - biopython
     - ReportLab
