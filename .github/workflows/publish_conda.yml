@@ -12,9 +12,9 @@ jobs:
     env: 
       PACKAGE_VERSION: "0.1.0"
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@master
     - name: publish-to-conda
-      uses: MichaelsJP/conda-package-publish-action@v1.0.0
+      uses: 3liv/conda-package-publish-action@master
       with:
         subDir: 'conda.recipe'
         AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
