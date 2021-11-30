@@ -1,4 +1,4 @@
-# qpython conda recipe
+# diffexpr conda recipe
 
 [![Build Status](https://travis-ci.com/3liv/qpython-conda-recipe.svg?branch=master)](https://travis-ci.com/3liv/qpython-conda-recipe)
 [![Anaconda-Server Badge](https://anaconda.org/benchod/qpython/badges/installer/conda.svg)](https://conda.anaconda.org/benchod)
