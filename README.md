@@ -1,6 +1,6 @@
 # diffexpr conda recipe
 
-[![Build Status](https://travis-ci.com/3liv/qpython-conda-recipe.svg?branch=master)](https://travis-ci.com/3liv/qpython-conda-recipe)
+[![Build Status](https://github.com/3liv/diffexpr-conda-recipe/actions/workflows/publish_conda.yml/badge.svg?branch=master)](https://github.com/3liv/diffexpr-conda-recipe)
 [![Anaconda-Server Badge](https://anaconda.org/benchod/qpython/badges/installer/conda.svg)](https://conda.anaconda.org/benchod)
 
 
