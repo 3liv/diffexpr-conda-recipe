@@ -9,6 +9,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env: 
+      PACKAGE_VERSION: "0.1.0"
     steps:
     - uses: actions/checkout@v1
     - name: publish-to-conda
