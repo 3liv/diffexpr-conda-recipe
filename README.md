@@ -1,7 +1,7 @@
 # diffexpr conda recipe
 
 [![Build Status](https://github.com/3liv/diffexpr-conda-recipe/actions/workflows/publish_conda.yml/badge.svg?branch=master)](https://github.com/3liv/diffexpr-conda-recipe)
-[![Anaconda-Server Badge](https://anaconda.org/benchod/qpython/badges/installer/conda.svg)](https://conda.anaconda.org/benchod)
+[![Anaconda-Server Badge](https://anaconda.org/aliv__/diffexpr/badges/installer/conda.svg)](https://conda.anaconda.org/aliv__)
 
 
 #### To install via conda:
