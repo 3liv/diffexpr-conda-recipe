@@ -1,0 +1,52 @@
+{% set version = environ['PACKAGE_VERSION'] %}
+package:
+  name: diffexpr
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/3liv/diffexpr.git
+
+build:
+  script_env:
+      - PACKAGE_VERSION
+      - CONDA_BLD_PATH
+  # noarch: python
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed . -vv
+
+requirements:
+  host:
+    - python
+    - pip
+    - poetry
+    - r
+    - r-ggplot2
+  run:
+    - r
+    - r-ggplot2
+    - python
+    - pip
+    - poetry
+    - numpy
+    - pandas
+    - tzlocal
+    - rpy2
+    - biopython
+    - ReportLab
+    - pytest-cov
+    - bioconductor-deseq2
+    - codecov
+
+test:
+  imports:
+    - diffexpr
+
+about:
+  home: https://github.com/3liv/diffexpr-conda-recipe
+  license: MIT
+  summary: 'DESeq2 python interface'
+  description: |
+  dev_url: https://github.com/3liv/diffexpr-conda-recipe

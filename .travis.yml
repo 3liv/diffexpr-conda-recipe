@@ -1,0 +1,48 @@
+language: bash
+
+notifications:
+    email: false
+
+jobs:
+    include:
+        - os: windows
+          filter_secrets: false
+        - os: linux
+        - os: osx
+env:
+    - PACKAGE_VERSION="0.1.0" CONDA_BLD_PATH=~/conda-bld
+
+before_install:
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install openssl.light; fi
+    - mkdir -p $CONDA_BLD_PATH
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; fi
+    - if [ "$TRAVIS_OS_NAME" = "osx" ]; then  wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh; fi
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then travis_wait wget https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe -O miniconda.exe; fi
+    - if [ "$TRAVIS_OS_NAME" = "linux" ] || [ "@TRAVIS_OS_NAME" = "osx" ]; then chmod +x miniconda.sh; fi
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then travis_wait ./miniconda.exe //InstallationType=JustMe //RegisterPython=0 //S //D=$HOME/miniconda; else bash miniconda.sh -b -p $HOME/miniconda; fi
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then ls $HOME/Miniconda3; fi
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then export PATH="$HOME/Miniconda3/Scripts:$HOME/Miniconda/Library/bin:$PATH"; else export PATH="$HOME/miniconda/bin:$PATH"; fi
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then which conda; fi
+    - conda update --all --yes -q;
+
+install:
+    - conda create --yes -n diffexpr_build python=3.6 numpy pandas conda-build anaconda-client
+
+script:
+    - source activate diffexpr_build
+    - conda build conda.recipe/
+    - PACKAGE_DIR=$(conda build conda.recipe --output) 
+    - ls `dirname $PACKAGE_DIR`
+    - ls $CONDA_BLD_PATH
+    - PACKAGE_PATH=$PACKAGE_DIR
+    - echo $PACKAGE_PATH
+    - anaconda --show-traceback -t $CONDA_UPLOAD_TOKEN upload $PACKAGE_PATH --force
+    - source deactivate
+
+after_success:
+    - source deactivate
+    - conda create --yes -n diffexpr_test python=3.6 diffexpr -c $CONDA_UPLOAD_USER
+    - conda info --envs
+    - source activate diffexpr_test
+    - python -c "from diffexpr import *"
+
