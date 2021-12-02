@@ -10,7 +10,7 @@ build:
   script_env:
       - PACKAGE_VERSION
       - CONDA_BLD_PATH
-  # noarch: python
+  ##noarch: python
   number: 0
   rpaths:
     - lib/R/lib/
